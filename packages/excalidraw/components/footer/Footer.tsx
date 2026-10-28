@@ -3,13 +3,17 @@ import clsx from "clsx";
 import { actionShortcuts } from "../../actions";
 import { useTunnels } from "../../context/tunnels";
 import { ExitZenModeButton, UndoRedoActions, ZoomActions } from "../Actions";
-import { useApp } from "../App";
+import { useApp, useExcalidrawSetAppState } from "../App";
 import { HelpButton } from "../HelpButton";
 import { Section } from "../Section";
 import Stack from "../Stack";
 
 import type { ActionManager } from "../../actions/manager";
-import type { UIAppState } from "../../types";
+import type { InputDevice, UIAppState } from "../../types";
+import DropdownMenuItemContentRadio from "../dropdownMenu/DropdownMenuItemContentRadio";
+import { resolveInputDevice } from "@excalidraw/excalidraw/appState";
+import { t } from "@excalidraw/excalidraw/i18n";
+import { emptyIcon } from "../icons";
 
 const Footer = ({
   appState,
@@ -28,6 +32,7 @@ const Footer = ({
 }) => {
   const { FooterCenterTunnel, WelcomeScreenHelpHintTunnel } = useTunnels();
   const app = useApp();
+  const setAppState = useExcalidrawSetAppState();
 
   return (
     <footer
@@ -52,6 +57,33 @@ const Footer = ({
                       appState.zenModeEnabled,
                   })}
                 />
+              )}
+              {defaultUIEnabled && !appState.viewModeEnabled && (
+                <DropdownMenuItemContentRadio<Exclude<InputDevice, "auto">>
+                  name="inputDevice"
+                  icon={emptyIcon}
+                  // `auto` isn't offered yet; the radio shows what it resolves to
+                  value={resolveInputDevice(appState.inputDevice)}
+                  onChange={(value) => {
+                    setAppState({
+                      inputDevice: value,
+                    });
+                  }}
+                  choices={[
+                    {
+                      value: "trackpad",
+                      label: t("labels.inputDeviceTrackpad"),
+                      ariaLabel: t("labels.inputDeviceTrackpad"),
+                    },
+                    {
+                      value: "mouse",
+                      label: t("labels.inputDeviceMouse"),
+                      ariaLabel: t("labels.inputDeviceMouse"),
+                    },
+                  ]}
+                >
+                  {t("labels.inputDevice")}
+                </DropdownMenuItemContentRadio>
               )}
             </Section>
           </Stack.Col>
