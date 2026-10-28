@@ -199,6 +199,7 @@ export class AppText {
       const stickyLayout = stickyContainer
         ? getStickyNoteLayout(stickyContainer, latestTextElement, {
             originalText: nextOriginalText,
+            renderEnvironment: this.app.renderEnvironment,
           })
         : null;
       // a free text stops growing at the view's width (between the side
@@ -230,6 +231,7 @@ export class AppText {
                   elementsMap,
                   nextOriginalText,
                   maxWidth,
+                  this.app.renderEnvironment,
                 )),
             });
           }
@@ -269,7 +271,9 @@ export class AppText {
           stickyContainer.id,
         );
         if (latestContainer) {
-          updateBoundElements(latestContainer, this.app.scene);
+          updateBoundElements(latestContainer, this.app.scene, {
+            renderEnvironment: this.app.renderEnvironment,
+          });
         }
       }
     };
@@ -292,7 +296,9 @@ export class AppText {
       onChange: withBatchedUpdates((nextOriginalText) => {
         updateElement(nextOriginalText, false);
         if (isNonDeletedElement(element)) {
-          updateBoundElements(element, this.app.scene);
+          updateBoundElements(element, this.app.scene, {
+            renderEnvironment: this.app.renderEnvironment,
+          });
         }
       }),
       onSubmit: withBatchedUpdates(({ viaKeyboard, nextOriginalText }) => {
@@ -370,7 +376,7 @@ export class AppText {
       autoSelect: !this.app.editorInterface.isTouchScreen,
     });
     // deselect all other elements when inserting text
-    this.app.deselectElements();
+    this.app.selection.clear();
     // (the linear element editor stays up, to come back to on submit — but
     // without the hover affordances, which are for the selection)
     if (this.app.state.selectedLinearElement) {
@@ -719,6 +725,7 @@ export class AppText {
       const minWidth = getApproxMinLineWidth(
         getFontString(fontString),
         lineHeight,
+        this.app.renderEnvironment,
       );
       const minHeight = getApproxMinLineHeight(fontSize, lineHeight);
       const newHeight = Math.max(container.height, minHeight);
@@ -823,6 +830,7 @@ export class AppText {
             ? container.angle
             : (0 as Radians),
         frameId,
+        renderEnvironment: this.app.renderEnvironment,
       });
 
     if (!existingTextElement && shouldBindToContainer && container) {
