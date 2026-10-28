@@ -62,6 +62,7 @@ const Footer = ({
                     "layer-ui__wrapper__footer-left--transition-bottom":
                       appState.zenModeEnabled,
                   })}
+                  show={!appState.zenModeEnabled}
                 />
               )}
             </Section>
