@@ -7,6 +7,7 @@ import { useExcalidrawSetAppState } from "../App";
 import { Button } from "../Button";
 import { Tooltip } from "../Tooltip";
 import { mouseIcon, trackpadIcon } from "../icons";
+import { IconButton } from "../IconButton";
 
 export default function SetInputMenu({
   appState,
@@ -34,22 +35,16 @@ export default function SetInputMenu({
       {show && (
         <>
           {!footer && <p>{t("labels.inputDevice")}</p>}
-          <Button
-            onSelect={swapInputMethod}
-            selected={currentDevice === "mouse"}
-            className={className}
-          >
-            <Tooltip
-              label={
-                currentDevice === "trackpad"
-                  ? t("labels.inputDeviceTrackpad")
-                  : t("labels.inputDeviceMouse")
-              }
-              delay
-            >
-              {currentDevice === "trackpad" ? trackpadIcon : mouseIcon}
-            </Tooltip>
-          </Button>
+          <IconButton
+            type="button"
+            icon={currentDevice === "trackpad" ? trackpadIcon : mouseIcon}
+            onClick={swapInputMethod}
+            aria-label={
+              currentDevice === "trackpad"
+                ? t("labels.inputDeviceTrackpad")
+                : t("labels.inputDeviceMouse")
+            }
+          />
         </>
       )}
     </div>
