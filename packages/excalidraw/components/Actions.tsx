@@ -46,6 +46,7 @@ import { getShapeActionPredicates } from "./shapeActionPredicates";
 import type { ShapeActionPredicates } from "./shapeActionPredicates";
 import type { AppClassProperties, UIAppState, AppState } from "../types";
 import type { ActionManager } from "../actions/manager";
+import SetInputMenu from "./dropdownMenu/SetInputMenu";
 
 // re-exported for consumers outside the styles panel (e.g. CommandPalette)
 export {

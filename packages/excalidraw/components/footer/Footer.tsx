@@ -56,13 +56,21 @@ const Footer = ({
                 />
               )}
               {defaultUIEnabled && !appState.viewModeEnabled && (
-                <SetInputMenu
-                  appState={appState}
+                /* <SwitchInputModeActions
                   className={clsx("zen-mode-transition", {
                     "layer-ui__wrapper__footer-left--transition-bottom":
                       appState.zenModeEnabled,
                   })}
+                  renderAction={actionManager.renderAction}
+                /> */
+                <SetInputMenu
+                  appState={appState}
+                  className={clsx("zen-mode-transition undo-redo-buttons", {
+                    "layer-ui__wrapper__footer-left--transition-bottom":
+                      appState.zenModeEnabled,
+                  })}
                   show={!appState.zenModeEnabled}
+                  footer={true}
                 />
               )}
             </Section>

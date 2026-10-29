@@ -12,10 +12,12 @@ export default function SetInputMenu({
   appState,
   className,
   show,
+  footer,
 }: {
   appState: UIAppState;
   className?: string;
   show: Boolean;
+  footer: Boolean;
 }) {
   const setAppState = useExcalidrawSetAppState();
   const { t } = useI18n();
@@ -45,10 +47,9 @@ export default function SetInputMenu({
             },
           ]}
         >
-          {t("labels.inputDevice")}
+          {!footer && <p>{t("labels.inputDevice")}</p>}
         </DropdownMenuItemContentRadio>
       )}
-      ;
     </div>
   );
 }
