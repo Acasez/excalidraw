@@ -8,7 +8,7 @@ import { Tooltip } from "../Tooltip";
 import { mouseIcon, trackpadIcon } from "../icons";
 import { IconButton } from "../IconButton";
 
-export default function SetInputMenu({
+export default function InputToggle({
   appState,
   className,
   show,
@@ -26,6 +26,10 @@ export default function SetInputMenu({
       inputDevice: currentDevice === "trackpad" ? "mouse" : "trackpad",
     });
   };
+  const deviceLabel =
+    currentDevice === "trackpad"
+      ? t("labels.inputDeviceTrackpad")
+      : t("labels.inputDeviceMouse");
 
   return (
     <div className={className}>
@@ -44,11 +48,7 @@ export default function SetInputMenu({
                 }
               />
             }
-            label={
-              currentDevice === "trackpad"
-                ? t("labels.inputDeviceTrackpad")
-                : t("labels.inputDeviceMouse")
-            }
+            label={`${t("labels.inputDevice")}: ${deviceLabel}`}
           ></Tooltip>
         </>
       )}

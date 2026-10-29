@@ -2,7 +2,7 @@ import clsx from "clsx";
 
 import type { UIAppState } from "@excalidraw/excalidraw/types";
 
-import SetInputMenu from "../dropdownMenu/SetInputMenu";
+import InputToggle from "../dropdownMenu/InputToggle";
 import Stack from "../Stack";
 import { actionShortcuts } from "../../actions";
 import { useTunnels } from "../../context/tunnels";
@@ -63,7 +63,7 @@ const Footer = ({
                   })}
                   renderAction={actionManager.renderAction}
                 /> */
-                <SetInputMenu
+                <InputToggle
                   appState={appState}
                   className={clsx("zen-mode-transition undo-redo-buttons", {
                     "layer-ui__wrapper__footer-left--transition-bottom":
