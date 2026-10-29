@@ -2,7 +2,6 @@ import clsx from "clsx";
 
 import type { UIAppState } from "@excalidraw/excalidraw/types";
 
-import InputToggle from "../dropdownMenu/InputToggle";
 import Stack from "../Stack";
 import { actionShortcuts } from "../../actions";
 import { useTunnels } from "../../context/tunnels";
@@ -10,6 +9,8 @@ import { ExitZenModeButton, UndoRedoActions, ZoomActions } from "../Actions";
 import { useApp } from "../App";
 import { HelpButton } from "../HelpButton";
 import { Section } from "../Section";
+
+import InputToggle from "./InputToggle";
 
 import type { ActionManager } from "../../actions/manager";
 
