@@ -70,7 +70,6 @@ const Footer = ({
                       appState.zenModeEnabled,
                   })}
                   show={!appState.zenModeEnabled}
-                  footer={true}
                 />
               )}
             </Section>
