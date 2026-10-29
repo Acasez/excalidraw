@@ -5,6 +5,8 @@ import { useI18n } from "../../i18n";
 
 import { useExcalidrawSetAppState } from "../App";
 import { Button } from "../Button";
+import { Tooltip } from "../Tooltip";
+import { mouseIcon, trackpadIcon } from "../icons";
 
 export default function SetInputMenu({
   appState,
@@ -37,9 +39,16 @@ export default function SetInputMenu({
             selected={currentDevice === "mouse"}
             className={className}
           >
-            {currentDevice === "trackpad"
-              ? t("labels.inputDeviceTrackpad")
-              : t("labels.inputDeviceMouse")}
+            <Tooltip
+              label={
+                currentDevice === "trackpad"
+                  ? t("labels.inputDeviceTrackpad")
+                  : t("labels.inputDeviceMouse")
+              }
+              delay
+            >
+              {currentDevice === "trackpad" ? trackpadIcon : mouseIcon}
+            </Tooltip>
           </Button>
         </>
       )}
