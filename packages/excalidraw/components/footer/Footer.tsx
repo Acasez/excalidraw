@@ -56,14 +56,8 @@ const Footer = ({
                   })}
                 />
               )}
+              {/*  New Input Toggle here, added so its easier to toggle between trackpad and mouse input modes */}
               {defaultUIEnabled && !appState.viewModeEnabled && (
-                /* <SwitchInputModeActions
-                  className={clsx("zen-mode-transition", {
-                    "layer-ui__wrapper__footer-left--transition-bottom":
-                      appState.zenModeEnabled,
-                  })}
-                  renderAction={actionManager.renderAction}
-                /> */
                 <InputToggle
                   appState={appState}
                   className={clsx("zen-mode-transition undo-redo-buttons", {

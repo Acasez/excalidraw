@@ -31,7 +31,7 @@ export default function InputToggle({
       ? t("labels.inputDeviceTrackpad")
       : t("labels.inputDeviceMouse");
 
-  const instructions =
+  const zoomInstructions =
     currentDevice === "trackpad"
       ? t("labels.inputInstructions.trackpad")
       : t("labels.inputInstructions.mouse");
@@ -53,7 +53,9 @@ export default function InputToggle({
                 }
               />
             }
-            label={`${t("labels.inputDevice")}: ${deviceLabel} ${instructions}`}
+            label={`${t(
+              "labels.inputDevice",
+            )}: ${deviceLabel} ${zoomInstructions}`}
           ></Tooltip>
         </>
       )}

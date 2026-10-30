@@ -699,6 +699,7 @@ export const RedoIcon = createIcon(
   modifiedTablerIconProps,
 );
 
+/* This and trackpad are used for the input toggle in the footer  */
 export const mouseIcon = createIcon(
   <>
     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
@@ -713,7 +714,6 @@ export const mouseIcon = createIcon(
   </>,
   tablerIconProps,
 );
-
 export const trackpadIcon = createIcon(
   <>
     <path stroke="none" d="M0 0h24v24H0z" fill="none" />
