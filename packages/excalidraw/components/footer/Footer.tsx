@@ -3,6 +3,8 @@ import clsx from "clsx";
 import type { UIAppState } from "@excalidraw/excalidraw/types";
 
 import SetInputMenu from "../dropdownMenu/SetInputMenu";
+import DropdownMenu from "../dropdownMenu/DropdownMenu";
+import Preferences from "../main-menu/Preferences";
 import Stack from "../Stack";
 import { actionShortcuts } from "../../actions";
 import { useTunnels } from "../../context/tunnels";
@@ -12,6 +14,7 @@ import { HelpButton } from "../HelpButton";
 import { Section } from "../Section";
 
 import type { ActionManager } from "../../actions/manager";
+import MainMenu from "../main-menu/MainMenu";
 
 const Footer = ({
   appState,
@@ -30,6 +33,7 @@ const Footer = ({
 }) => {
   const { FooterCenterTunnel, WelcomeScreenHelpHintTunnel } = useTunnels();
   const app = useApp();
+  const tt = true;
 
   return (
     <footer
@@ -56,13 +60,12 @@ const Footer = ({
                 />
               )}
               {defaultUIEnabled && !appState.viewModeEnabled && (
-                <SetInputMenu
-                  appState={appState}
+                <Preferences
+                  renderAction={actionManager.renderAction}
                   className={clsx("zen-mode-transition", {
                     "layer-ui__wrapper__footer-left--transition-bottom":
                       appState.zenModeEnabled,
                   })}
-                  show={!appState.zenModeEnabled}
                 />
               )}
             </Section>

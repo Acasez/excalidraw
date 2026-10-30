@@ -477,6 +477,7 @@ export interface AppState {
   isRotating: boolean;
   zoom: Zoom;
   openMenu: "canvas" | null;
+  openPreferences: "canvas" | null;
   openPopup:
     | "canvasBackground"
     | "elementBackground"

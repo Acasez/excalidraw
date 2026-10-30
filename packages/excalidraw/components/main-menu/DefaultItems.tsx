@@ -581,7 +581,7 @@ const PreferencesToggleShowHintsItem = () => {
   );
 };
 
-export const PreferencesToggleGridModeItem = () => {
+const PreferencesToggleGridModeItem = () => {
   const { t } = useI18n();
   const actionManager = useExcalidrawActionManager();
   const appState = useUIAppState();
