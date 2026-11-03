@@ -61,7 +61,6 @@ const Footer = ({
               )}
               {defaultUIEnabled && !appState.viewModeEnabled && (
                 <Preferences
-                  renderAction={actionManager.renderAction}
                   className={clsx("zen-mode-transition", {
                     "layer-ui__wrapper__footer-left--transition-bottom":
                       appState.zenModeEnabled,

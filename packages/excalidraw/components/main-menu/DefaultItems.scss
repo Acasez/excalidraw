@@ -19,3 +19,14 @@
     }
   }
 }
+
+.preferences-menu-button {
+  margin-left: 0.5rem;
+  font-size: 0.875rem !important;
+  width: var(--lg-button-size);
+  height: var(--lg-button-size);
+
+  background-color: var(--color-surface-low);
+  border-radius: var(--border-radius-lg);
+  box-shadow: 0 0 0 1px var(--color-surface-lowest);
+}

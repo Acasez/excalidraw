@@ -30,8 +30,6 @@ import { settingsIcon, emptyIcon } from "../icons";
 
 import "./DefaultItems.scss";
 
-import type { ActionManager } from "../../actions/manager.tsx";
-
 import type { InputDevice } from "../../types";
 
 const PreferencesToggleToolLockItem = () => {
@@ -269,62 +267,54 @@ export default function Preferences({
   children,
   additionalItems,
   className,
-  renderAction,
 }: {
   children?: React.ReactNode;
   additionalItems?: React.ReactNode;
   className?: string;
-  renderAction: ActionManager["renderAction"];
 }) {
   const appState = useUIAppState();
   const setAppState = useExcalidrawSetAppState();
   const { t } = useI18n();
   return (
-    <div className={className}>
+    <div className={`${className} preferences-menu-button`}>
       <Tooltip label={t("labels.preferences")} delay>
-        {renderAction("undo")}
+        <DropdownMenu open={appState.openPreferences === "canvas"}>
+          <DropdownMenu.Trigger
+            className="main-menu-trigger"
+            onToggle={() => {
+              setAppState({
+                openPreferences:
+                  appState.openPreferences === "canvas" ? null : "canvas",
+                openPopup: null,
+                openDialog: null,
+              });
+            }}
+          >
+            {settingsIcon}
+          </DropdownMenu.Trigger>
+          <DropdownMenu.Content
+            className="main-menu"
+            onClickOutside={() => setAppState({ openPreferences: null })}
+          >
+            {children || (
+              <>
+                <PreferencesBoxSelectionModeItem />
+                <PreferencesInputDeviceItem />
+                <PreferencesToggleToolLockItem />
+                <PreferencesToggleSnapModeItem />
+                <PreferencesToggleGridModeItem />
+                <PreferencesToggleZenModeItem />
+                <PreferencesToggleViewModeItem />
+                <PreferencesToggleElementPropertiesItem />
+                <PreferencesToggleArrowBindingItem />
+                <PreferencesToggleMidpointSnappingItem />
+                <PreferencesToggleShowHintsItem />
+              </>
+            )}
+            {additionalItems}
+          </DropdownMenu.Content>
+        </DropdownMenu>
       </Tooltip>
-      <DropdownMenu open={appState.openPreferences === "canvas"}>
-        <DropdownMenu.Trigger
-          // onToggle={() => {
-          //   setIsExtraToolsMenuOpen(!isExtraToolsMenuOpen);
-          // }}
-          onToggle={() => {
-            setAppState({
-              openPreferences:
-                appState.openPreferences === "canvas" ? null : "canvas",
-              openPopup: null,
-              openDialog: null,
-            });
-          }}
-          // data-testid="main-menu-trigger"
-          // className="main-menu-trigger"
-        >
-          {settingsIcon}
-          {/* {t("labels.preferences")} */}
-        </DropdownMenu.Trigger>
-        <DropdownMenu.Content
-          className="excalidraw-main-menu-preferences-submenu"
-          onClickOutside={() => setAppState({ openPreferences: null })}
-        >
-          {children || (
-            <>
-              <PreferencesBoxSelectionModeItem />
-              <PreferencesInputDeviceItem />
-              <PreferencesToggleToolLockItem />
-              <PreferencesToggleSnapModeItem />
-              <PreferencesToggleGridModeItem />
-              <PreferencesToggleZenModeItem />
-              <PreferencesToggleViewModeItem />
-              <PreferencesToggleElementPropertiesItem />
-              <PreferencesToggleArrowBindingItem />
-              <PreferencesToggleMidpointSnappingItem />
-              <PreferencesToggleShowHintsItem />
-            </>
-          )}
-          {additionalItems}
-        </DropdownMenu.Content>
-      </DropdownMenu>
     </div>
   );
 }
